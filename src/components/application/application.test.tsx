@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { Application } from "./application";
 
-describe('Application', () => {
+describe('Application (Test by Roles)', () => {
   test('reners correctly', () => {
     render(<Application />);
     
@@ -51,3 +51,30 @@ describe('Application', () => {
     expect(buttonElement).toBeInTheDocument();
   })
 });
+
+describe('Application (Test by Text Match)', () => {
+  
+  test('renders correctly (by string)', () => {
+    render(<Application />)
+
+    const customDivElem = screen.getByText('Custom Element'); //full string match
+    expect(customDivElem).toBeInTheDocument();
+
+    const customDivElem1 = screen.getByText('tom Element', {exact: false}); //substring match
+    expect(customDivElem1).toBeInTheDocument();
+  })
+
+  test('renders correctly (by regex)', () => {
+    render(<Application />)
+
+    const customDivElem3 = screen.getByText(/element/i); ////substring match, ignore cases
+    expect(customDivElem3).toBeInTheDocument();
+  })
+
+  test('renders correctly (by custom function)', () => {
+    render(<Application />)
+
+    const customDivElem3 = screen.getByText((content) => content.startsWith('Custom')); ////substring match, ignore cases
+    expect(customDivElem3).toBeInTheDocument();
+  })
+})

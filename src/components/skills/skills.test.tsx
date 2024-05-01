@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import Skills from "./skills";
 
-describe('Skills', () => {
+describe('Skills (Test by Roles)', () => {
   const skills = ['HTML', 'React', 'JavaScript'];
 
   test('renders currectly', () => {
