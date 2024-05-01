@@ -1,23 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SkillsProps } from "./skills.types";
 
 const Skills = (props: SkillsProps) => {
   const { skills } = props;
   const [ isLoggedIn, setIsLoggedIn ] = useState(false);
 
-  const handleClick = () => {
-    setIsLoggedIn(true);
-  }
+  useEffect(() => {
+    setTimeout(() => setIsLoggedIn(true), 1001)
+  }, [])
   return (
     <>
       <ul>
         {
           skills.map((skill) => {
-            return <li key={skill}>{ skill}</li>
+            return <li key={skill}>{ skill }</li>
           })
         }
         {
-          isLoggedIn ? <button>User is logged In</button> : <button onClick={handleClick}>Log In</button>
+          isLoggedIn ? <button>Start learning</button> : <button onClick={() => setIsLoggedIn(true)}>Log In</button>
         }
       </ul>
     </>

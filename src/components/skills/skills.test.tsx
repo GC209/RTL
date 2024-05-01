@@ -27,8 +27,18 @@ describe('Skills (Test by Roles)', () => {
   test('start learning button is not rendered', () => {
     render(<Skills skills={skills} />);
     const loggedInButtonElement = screen.queryByRole('button', {
-      name: "User is logged In"
+      name: "Start learning"
     });
     expect(loggedInButtonElement).not.toBeInTheDocument();
+  })
+
+  test('start learning button is eventually displayed',async () => {
+    render(<Skills skills={skills} />);
+    const loggedInButtonElement = await screen.findByRole('button', {
+      name: 'Start learning'
+    }, {
+      timeout: 2000
+    });
+    expect(loggedInButtonElement).toBeInTheDocument();
   })
 });
