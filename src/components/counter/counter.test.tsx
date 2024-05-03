@@ -39,4 +39,35 @@ describe('counter', () => {
     const countElement = screen.getByRole('heading');
     expect(countElement).toHaveTextContent("2");
   })
+
+  test('renders a count of 10 after clicking the set button', async () => {
+    user.setup();
+    render(<Counter />);
+    const inputElem = screen.getByRole('spinbutton');
+    const setBtnElem = screen.getByRole('button', {
+      name: 'Set'
+    });
+    const countElement = screen.getByRole('heading');
+    await user.type(inputElem, '10');
+    await user.click(setBtnElem);
+    expect(countElement).toHaveTextContent('10');
+  })
+
+  test('correct order of focus', async () => {
+    user.setup();
+    render(<Counter />);
+    const inputElem = screen.getByRole('spinbutton');
+    const setBtnElem = screen.getByRole('button', {
+      name: 'Set'
+    });
+    const incrementBtn = screen.getByRole('button', {
+      name: "Increment"
+    })
+    await user.tab();
+    expect(incrementBtn).toHaveFocus();
+    await user.tab();
+    expect(inputElem).toHaveFocus();
+    await user.tab();
+    expect(setBtnElem).toHaveFocus();
+  })
 })
