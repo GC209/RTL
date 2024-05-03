@@ -6,8 +6,8 @@ function App() {
   return (
     <div className="App">
       {/* <Greet name="Gaurav" />
-      <Application /> */}
-      {/* <Skills skills={['HTML', 'CSS']} /> */}
+      <Application /> 
+      <Skills skills={['HTML', 'CSS']} /> */}
       <Counter />
     </div>
   );
